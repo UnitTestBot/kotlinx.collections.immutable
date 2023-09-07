@@ -7,7 +7,7 @@ package kotlinx.collections.immutable.implementations.immutableSet
 
 import kotlinx.collections.immutable.internal.assert
 
-internal class PersistentHashSetMutableIterator<E>(private val builder: PersistentHashSetBuilder<E>)
+class PersistentHashSetMutableIterator<E>(private val builder: PersistentHashSetBuilder<E>)
     : PersistentHashSetIterator<E>(builder.node), MutableIterator<E> {
     private var lastIteratedElement: E? = null
     private var nextWasInvoked = false

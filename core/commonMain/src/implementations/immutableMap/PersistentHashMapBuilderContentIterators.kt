@@ -8,7 +8,7 @@ package kotlinx.collections.immutable.implementations.immutableMap
 import kotlinx.collections.immutable.internal.assert
 
 
-internal class TrieNodeMutableEntriesIterator<K, V>(
+class TrieNodeMutableEntriesIterator<K, V>(
         private val parentIterator: PersistentHashMapBuilderEntriesIterator<K, V>
 ) : TrieNodeBaseIterator<K, V, MutableMap.MutableEntry<K, V>>() {
 
@@ -35,7 +35,7 @@ private class MutableMapEntry<K, V>(
 }
 
 
-internal open class PersistentHashMapBuilderBaseIterator<K, V, T>(
+open class PersistentHashMapBuilderBaseIterator<K, V, T>(
         private val builder: PersistentHashMapBuilder<K, V>,
         path: Array<TrieNodeBaseIterator<K, V, T>>
 ) : MutableIterator<T>, PersistentHashMapBaseIterator<K, V, T>(builder.node, path) {
@@ -125,7 +125,7 @@ internal open class PersistentHashMapBuilderBaseIterator<K, V, T>(
     }
 }
 
-internal class PersistentHashMapBuilderEntriesIterator<K, V>(
+class PersistentHashMapBuilderEntriesIterator<K, V>(
         builder: PersistentHashMapBuilder<K, V>
 ) : MutableIterator<MutableMap.MutableEntry<K, V>> {
     private val base = PersistentHashMapBuilderBaseIterator<K, V, MutableMap.MutableEntry<K, V>>(
@@ -140,8 +140,8 @@ internal class PersistentHashMapBuilderEntriesIterator<K, V>(
     fun setValue(key: K, newValue: V): Unit = base.setValue(key, newValue)
 }
 
-internal class PersistentHashMapBuilderKeysIterator<K, V>(builder: PersistentHashMapBuilder<K, V>)
+class PersistentHashMapBuilderKeysIterator<K, V>(builder: PersistentHashMapBuilder<K, V>)
     : PersistentHashMapBuilderBaseIterator<K, V, K>(builder, Array(TRIE_MAX_HEIGHT + 1) { TrieNodeKeysIterator<K, V>() })
 
-internal class PersistentHashMapBuilderValuesIterator<K, V>(builder: PersistentHashMapBuilder<K, V>)
+class PersistentHashMapBuilderValuesIterator<K, V>(builder: PersistentHashMapBuilder<K, V>)
     : PersistentHashMapBuilderBaseIterator<K, V, V>(builder, Array(TRIE_MAX_HEIGHT + 1) { TrieNodeValuesIterator<K, V>() })

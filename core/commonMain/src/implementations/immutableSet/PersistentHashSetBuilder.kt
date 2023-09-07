@@ -9,7 +9,7 @@ import kotlinx.collections.immutable.PersistentSet
 import kotlinx.collections.immutable.internal.DeltaCounter
 import kotlinx.collections.immutable.internal.MutabilityOwnership
 
-internal class PersistentHashSetBuilder<E>(private var set: PersistentHashSet<E>) : AbstractMutableSet<E>(), PersistentSet.Builder<E> {
+class PersistentHashSetBuilder<E>(private var set: PersistentHashSet<E>) : AbstractMutableSet<E>(), PersistentSet.Builder<E> {
     internal var ownership = MutabilityOwnership()
         private set
     internal var node = set.node

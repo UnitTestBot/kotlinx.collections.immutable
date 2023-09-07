@@ -9,7 +9,7 @@ import kotlinx.collections.immutable.ImmutableCollection
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.internal.MapImplementation
 
-internal class PersistentOrderedMapEntries<K, V>(private val map: PersistentOrderedMap<K, V>) : ImmutableSet<Map.Entry<K, V>>, AbstractSet<Map.Entry<K, V>>() {
+class PersistentOrderedMapEntries<K, V>(private val map: PersistentOrderedMap<K, V>) : ImmutableSet<Map.Entry<K, V>>, AbstractSet<Map.Entry<K, V>>() {
     override val size: Int get() = map.size
 
     override fun contains(element: Map.Entry<K, V>): Boolean {
@@ -21,7 +21,7 @@ internal class PersistentOrderedMapEntries<K, V>(private val map: PersistentOrde
     }
 }
 
-internal class PersistentOrderedMapKeys<K, V>(private val map: PersistentOrderedMap<K, V>) : ImmutableSet<K>, AbstractSet<K>() {
+class PersistentOrderedMapKeys<K, V>(private val map: PersistentOrderedMap<K, V>) : ImmutableSet<K>, AbstractSet<K>() {
     override val size: Int
         get() = map.size
 
@@ -34,7 +34,7 @@ internal class PersistentOrderedMapKeys<K, V>(private val map: PersistentOrdered
     }
 }
 
-internal class PersistentOrderedMapValues<K, V>(private val map: PersistentOrderedMap<K, V>) : ImmutableCollection<V>, AbstractCollection<V>() {
+class PersistentOrderedMapValues<K, V>(private val map: PersistentOrderedMap<K, V>) : ImmutableCollection<V>, AbstractCollection<V>() {
     override val size: Int
         get() = map.size
 

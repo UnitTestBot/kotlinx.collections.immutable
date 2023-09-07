@@ -10,7 +10,7 @@ import kotlinx.collections.immutable.implementations.immutableMap.PersistentHash
 import kotlinx.collections.immutable.internal.EndOfChain
 import kotlinx.collections.immutable.mutate
 
-internal class Links(val previous: Any?, val next: Any?) {
+class Links(val previous: Any?, val next: Any?) {
     /** Constructs Links for a new single element */
     constructor() : this(EndOfChain, EndOfChain)
     /** Constructs Links for a new last element */
@@ -23,10 +23,10 @@ internal class Links(val previous: Any?, val next: Any?) {
     val hasPrevious get() = previous !== EndOfChain
 }
 
-internal class PersistentOrderedSet<E>(
-        internal val firstElement: Any?,
-        internal val lastElement: Any?,
-        internal val hashMap: PersistentHashMap<E, Links>
+class PersistentOrderedSet<E>(
+        val firstElement: Any?,
+        val lastElement: Any?,
+        val hashMap: PersistentHashMap<E, Links>
 ) : AbstractSet<E>(), PersistentSet<E> {
 
     override val size: Int get() = hashMap.size
@@ -123,8 +123,8 @@ internal class PersistentOrderedSet<E>(
      */
     override fun hashCode(): Int = super<AbstractSet>.hashCode()
 
-    internal companion object {
+    companion object {
         private val EMPTY = PersistentOrderedSet<Nothing>(EndOfChain, EndOfChain, PersistentHashMap.emptyOf())
-        internal fun <E> emptyOf(): PersistentSet<E> = EMPTY
+        fun <E> emptyOf(): PersistentSet<E> = EMPTY
     }
 }

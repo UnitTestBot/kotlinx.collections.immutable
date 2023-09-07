@@ -12,7 +12,7 @@ import kotlinx.collections.immutable.implementations.persistentOrderedMap.Persis
 import kotlinx.collections.immutable.implementations.persistentOrderedMap.PersistentOrderedMapBuilder
 import kotlinx.collections.immutable.mutate
 
-internal class PersistentHashMap<K, V>(internal val node: TrieNode<K, V>,
+class PersistentHashMap<K, V>(val node: TrieNode<K, V>,
                                        override val size: Int): AbstractMap<K, V>(), PersistentMap<K, V> {
 
     override val keys: ImmutableSet<K>
@@ -34,9 +34,7 @@ internal class PersistentHashMap<K, V>(internal val node: TrieNode<K, V>,
         return PersistentHashMapEntries(this)
     }
 
-    // TODO: compiler bug: this bridge should be generated automatically
-    @PublishedApi
-    internal fun getEntries(): Set<Map.Entry<K, V>> {
+    fun getEntries(): Set<Map.Entry<K, V>> {
         return createEntries()
     }
 
@@ -111,9 +109,9 @@ internal class PersistentHashMap<K, V>(internal val node: TrieNode<K, V>,
      */
     override fun hashCode(): Int = super<AbstractMap>.hashCode()
 
-    internal companion object {
+    companion object {
         private val EMPTY = PersistentHashMap(TrieNode.EMPTY, 0)
         @Suppress("UNCHECKED_CAST")
-        internal fun <K, V> emptyOf(): PersistentHashMap<K, V> = EMPTY as PersistentHashMap<K, V>
+        fun <K, V> emptyOf(): PersistentHashMap<K, V> = EMPTY as PersistentHashMap<K, V>
     }
 }

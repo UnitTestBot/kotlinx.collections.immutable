@@ -5,7 +5,7 @@
 
 package kotlinx.collections.immutable.implementations.immutableList
 
-internal class PersistentVectorIterator<out T>(root: Array<Any?>,
+class PersistentVectorIterator<out T>(root: Array<Any?>,
                                                private val tail: Array<T>,
                                                index: Int,
                                                size: Int,

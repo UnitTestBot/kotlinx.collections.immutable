@@ -8,7 +8,7 @@ package kotlinx.collections.immutable.implementations.immutableMap
 import kotlinx.collections.immutable.internal.MapImplementation
 
 // intermediate abstract class to workaround KT-43321
-internal abstract class AbstractMapBuilderEntries<E : Map.Entry<K, V>, K, V> : AbstractMutableSet<E>() {
+abstract class AbstractMapBuilderEntries<E : Map.Entry<K, V>, K, V> : AbstractMutableSet<E>() {
     final override fun contains(element: E): Boolean {
         // TODO: Eliminate this check after KT-30016 gets fixed.
         @Suppress("USELESS_CAST")
@@ -26,7 +26,7 @@ internal abstract class AbstractMapBuilderEntries<E : Map.Entry<K, V>, K, V> : A
     abstract fun removeEntry(element: Map.Entry<K, V>): Boolean
 }
 
-internal class PersistentHashMapBuilderEntries<K, V>(private val builder: PersistentHashMapBuilder<K, V>)
+class PersistentHashMapBuilderEntries<K, V>(private val builder: PersistentHashMapBuilder<K, V>)
     : AbstractMapBuilderEntries<MutableMap.MutableEntry<K, V>, K, V>() {
     override fun add(element: MutableMap.MutableEntry<K, V>): Boolean {
         throw UnsupportedOperationException()
@@ -52,7 +52,7 @@ internal class PersistentHashMapBuilderEntries<K, V>(private val builder: Persis
     }
 }
 
-internal class PersistentHashMapBuilderKeys<K, V>(private val builder: PersistentHashMapBuilder<K, V>) : MutableSet<K>, AbstractMutableSet<K>() {
+class PersistentHashMapBuilderKeys<K, V>(private val builder: PersistentHashMapBuilder<K, V>) : MutableSet<K>, AbstractMutableSet<K>() {
     override fun add(element: K): Boolean {
         throw UnsupportedOperationException()
     }
@@ -81,7 +81,7 @@ internal class PersistentHashMapBuilderKeys<K, V>(private val builder: Persisten
     }
 }
 
-internal class PersistentHashMapBuilderValues<K, V>(private val builder: PersistentHashMapBuilder<K, V>) : MutableCollection<V>, AbstractMutableCollection<V>() {
+class PersistentHashMapBuilderValues<K, V>(private val builder: PersistentHashMapBuilder<K, V>) : MutableCollection<V>, AbstractMutableCollection<V>() {
     override val size: Int
         get() = builder.size
 

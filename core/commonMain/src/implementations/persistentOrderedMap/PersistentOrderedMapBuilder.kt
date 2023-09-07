@@ -12,8 +12,8 @@ import kotlinx.collections.immutable.internal.EndOfChain
 import kotlinx.collections.immutable.internal.MapImplementation
 import kotlinx.collections.immutable.internal.assert
 
-internal class PersistentOrderedMapBuilder<K, V>(private var map: PersistentOrderedMap<K, V>) : AbstractMutableMap<K, V>(), PersistentMap.Builder<K, V> {
-    internal var firstKey = map.firstKey
+class PersistentOrderedMapBuilder<K, V>(private var map: PersistentOrderedMap<K, V>) : AbstractMutableMap<K, V>(), PersistentMap.Builder<K, V> {
+   internal var firstKey = map.firstKey
         private set
 
     private var lastKey = map.lastKey

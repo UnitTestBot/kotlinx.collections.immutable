@@ -9,7 +9,7 @@ import kotlinx.collections.immutable.PersistentSet
 import kotlinx.collections.immutable.internal.EndOfChain
 import kotlinx.collections.immutable.internal.assert
 
-internal class PersistentOrderedSetBuilder<E>(private var set: PersistentOrderedSet<E>) : AbstractMutableSet<E>(), PersistentSet.Builder<E> {
+class PersistentOrderedSetBuilder<E>(private var set: PersistentOrderedSet<E>) : AbstractMutableSet<E>(), PersistentSet.Builder<E> {
     internal var firstElement = set.firstElement
     private var lastElement = set.lastElement
     internal val hashMapBuilder = set.hashMap.builder()

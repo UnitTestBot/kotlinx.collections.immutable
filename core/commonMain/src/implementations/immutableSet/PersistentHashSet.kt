@@ -8,7 +8,7 @@ package kotlinx.collections.immutable.implementations.immutableSet
 import kotlinx.collections.immutable.PersistentSet
 import kotlinx.collections.immutable.mutate
 
-internal class PersistentHashSet<E>(internal val node: TrieNode<E>,
+class PersistentHashSet<E>(val node: TrieNode<E>,
                                     override val size: Int): AbstractSet<E>(), PersistentSet<E> {
     override fun contains(element: E): Boolean {
         return node.contains(element.hashCode(), element, 0)
@@ -64,8 +64,8 @@ internal class PersistentHashSet<E>(internal val node: TrieNode<E>,
         return PersistentHashSetBuilder(this)
     }
 
-    internal companion object {
+    companion object {
         private val EMPTY = PersistentHashSet(TrieNode.EMPTY, 0)
-        internal fun <E> emptyOf(): PersistentSet<E> = PersistentHashSet.EMPTY
+        fun <E> emptyOf(): PersistentSet<E> = PersistentHashSet.EMPTY
     }
 }

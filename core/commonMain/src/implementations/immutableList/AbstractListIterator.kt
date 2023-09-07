@@ -5,7 +5,7 @@
 
 package kotlinx.collections.immutable.implementations.immutableList
 
-internal abstract class AbstractListIterator<out E>(var index: Int, var size: Int) : ListIterator<E> {
+abstract class AbstractListIterator<out E>(var index: Int, var size: Int) : ListIterator<E> {
     override fun hasNext(): Boolean {
         return index < size
     }
@@ -22,19 +22,19 @@ internal abstract class AbstractListIterator<out E>(var index: Int, var size: In
         return index - 1
     }
 
-    internal fun checkHasNext() {
+    fun checkHasNext() {
         if (!hasNext())
             throw NoSuchElementException()
     }
 
-    internal fun checkHasPrevious() {
+    fun checkHasPrevious() {
         if (!hasPrevious())
             throw NoSuchElementException()
     }
 }
 
 
-internal class SingleElementListIterator<E>(private val element: E, index: Int): AbstractListIterator<E>(index, 1) {
+class SingleElementListIterator<E>(private val element: E, index: Int): AbstractListIterator<E>(index, 1) {
     override fun next(): E {
         checkHasNext()
         index++

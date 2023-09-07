@@ -6,7 +6,7 @@
 package kotlinx.collections.immutable.internal
 
 // 'iterate' all the bits set to one in a given integer, in the form of one-bit masks
-internal inline fun Int.forEachOneBit(body: (mask: Int, index: Int) -> Unit) {
+inline fun Int.forEachOneBit(body: (mask: Int, index: Int) -> Unit) {
     var mask = this
     var index = 0
     while (mask != 0) {

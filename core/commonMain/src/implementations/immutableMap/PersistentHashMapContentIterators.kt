@@ -10,7 +10,7 @@ import kotlin.js.JsName
 
 internal const val TRIE_MAX_HEIGHT = 7
 
-internal abstract class TrieNodeBaseIterator<out K, out V, out T> : Iterator<T> {
+abstract class TrieNodeBaseIterator<out K, out V, out T> : Iterator<T> {
     protected var buffer = TrieNode.EMPTY.buffer
         private set
     private var dataSize = 0
@@ -62,7 +62,7 @@ internal abstract class TrieNodeBaseIterator<out K, out V, out T> : Iterator<T> 
     }
 }
 
-internal class TrieNodeKeysIterator<out K, out V> : TrieNodeBaseIterator<K, V, K>() {
+class TrieNodeKeysIterator<out K, out V> : TrieNodeBaseIterator<K, V, K>() {
     override fun next(): K {
         assert(hasNextKey())
         index += 2
@@ -71,7 +71,7 @@ internal class TrieNodeKeysIterator<out K, out V> : TrieNodeBaseIterator<K, V, K
     }
 }
 
-internal class TrieNodeValuesIterator<out K, out V> : TrieNodeBaseIterator<K, V, V>() {
+class TrieNodeValuesIterator<out K, out V> : TrieNodeBaseIterator<K, V, V>() {
     override fun next(): V {
         assert(hasNextKey())
         index += 2
@@ -80,7 +80,7 @@ internal class TrieNodeValuesIterator<out K, out V> : TrieNodeBaseIterator<K, V,
     }
 }
 
-internal class TrieNodeEntriesIterator<out K, out V> : TrieNodeBaseIterator<K, V, Map.Entry<K, V>>() {
+class TrieNodeEntriesIterator<out K, out V> : TrieNodeBaseIterator<K, V, Map.Entry<K, V>>() {
     override fun next(): Map.Entry<K, V> {
         assert(hasNextKey())
         index += 2
@@ -89,7 +89,7 @@ internal class TrieNodeEntriesIterator<out K, out V> : TrieNodeBaseIterator<K, V
     }
 }
 
-internal open class MapEntry<out K, out V>(override val key: K, override val value: V) : Map.Entry<K, V> {
+open class MapEntry<out K, out V>(override val key: K, override val value: V) : Map.Entry<K, V> {
     override fun hashCode(): Int = key.hashCode() xor value.hashCode()
     override fun equals(other: Any?): Boolean =
             (other as? Map.Entry<*, *>)?.let { it.key == key && it.value == value } ?: false
@@ -98,7 +98,7 @@ internal open class MapEntry<out K, out V>(override val key: K, override val val
 }
 
 
-internal abstract class PersistentHashMapBaseIterator<K, V, T>(
+abstract class PersistentHashMapBaseIterator<K, V, T>(
         node: TrieNode<K, V>,
         protected val path: Array<TrieNodeBaseIterator<K, V, T>>
 ) : Iterator<T> {
@@ -174,11 +174,11 @@ internal abstract class PersistentHashMapBaseIterator<K, V, T>(
     }
 }
 
-internal class PersistentHashMapEntriesIterator<K, V>(node: TrieNode<K, V>)
+class PersistentHashMapEntriesIterator<K, V>(node: TrieNode<K, V>)
     : PersistentHashMapBaseIterator<K, V, Map.Entry<K, V>>(node, Array(TRIE_MAX_HEIGHT + 1) { TrieNodeEntriesIterator<K, V>() })
 
-internal class PersistentHashMapKeysIterator<K, V>(node: TrieNode<K, V>)
+class PersistentHashMapKeysIterator<K, V>(node: TrieNode<K, V>)
     : PersistentHashMapBaseIterator<K, V, K>(node, Array(TRIE_MAX_HEIGHT + 1) { TrieNodeKeysIterator<K, V>() })
 
-internal class PersistentHashMapValuesIterator<K, V>(node: TrieNode<K, V>)
+class PersistentHashMapValuesIterator<K, V>(node: TrieNode<K, V>)
     : PersistentHashMapBaseIterator<K, V, V>(node, Array(TRIE_MAX_HEIGHT + 1) { TrieNodeValuesIterator<K, V>() })

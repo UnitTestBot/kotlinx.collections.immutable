@@ -5,8 +5,8 @@
 
 package kotlinx.collections.immutable.implementations.persistentOrderedSet
 
-internal open class PersistentOrderedSetIterator<E>(private var nextElement: Any?,
-                                                    internal val map: Map<E, Links>) : Iterator<E> {
+open class PersistentOrderedSetIterator<E>(private var nextElement: Any?,
+                                           internal val map: Map<E, Links>) : Iterator<E> {
     internal var index = 0
 
     override fun hasNext(): Boolean {

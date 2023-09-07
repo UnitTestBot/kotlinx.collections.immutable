@@ -12,7 +12,7 @@ import kotlinx.collections.immutable.internal.MutabilityOwnership
 import kotlinx.collections.immutable.internal.assert
 import kotlinx.collections.immutable.internal.modCount
 
-internal class PersistentVectorBuilder<E>(private var vector: PersistentList<E>,
+class PersistentVectorBuilder<E>(private var vector: PersistentList<E>,
                                           private var vectorRoot: Array<Any?>?,
                                           private var vectorTail: Array<Any?>,
                                           internal var rootShift: Int) : AbstractMutableList<E>(), PersistentList.Builder<E> {

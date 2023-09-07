@@ -66,7 +66,7 @@ private inline fun Array<Any?>.filterTo(
     return j
 }
 
-internal class TrieNode<E>(
+class TrieNode<E>(
         var bitmap: Int,
         var buffer: Array<Any?>,
         var ownedBy: MutabilityOwnership?
@@ -81,7 +81,7 @@ internal class TrieNode<E>(
         return bitmap and positionMask == 0
     }
 
-    internal fun indexOfCellAt(positionMask: Int): Int {
+    fun indexOfCellAt(positionMask: Int): Int {
         return (bitmap and (positionMask - 1)).countOneBits()
     }
 
@@ -784,7 +784,7 @@ internal class TrieNode<E>(
         return this
     }
 
-    internal companion object {
-        internal val EMPTY = TrieNode<Nothing>(0, emptyArray())
+    companion object {
+        val EMPTY = TrieNode<Nothing>(0, emptyArray())
     }
 }

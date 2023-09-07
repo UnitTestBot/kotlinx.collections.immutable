@@ -8,7 +8,7 @@ package kotlinx.collections.immutable.implementations.persistentOrderedMap
 import kotlinx.collections.immutable.implementations.immutableMap.AbstractMapBuilderEntries
 import kotlinx.collections.immutable.internal.MapImplementation
 
-internal class PersistentOrderedMapBuilderEntries<K, V>(private val builder: PersistentOrderedMapBuilder<K, V>)
+class PersistentOrderedMapBuilderEntries<K, V>(private val builder: PersistentOrderedMapBuilder<K, V>)
     : AbstractMapBuilderEntries<MutableMap.MutableEntry<K, V>, K, V>() {
     override fun add(element: MutableMap.MutableEntry<K, V>): Boolean {
         throw UnsupportedOperationException()
@@ -34,7 +34,7 @@ internal class PersistentOrderedMapBuilderEntries<K, V>(private val builder: Per
     }
 }
 
-internal class PersistentOrderedMapBuilderKeys<K, V>(private val builder: PersistentOrderedMapBuilder<K, V>) : MutableSet<K>, AbstractMutableSet<K>() {
+class PersistentOrderedMapBuilderKeys<K, V>(private val builder: PersistentOrderedMapBuilder<K, V>) : MutableSet<K>, AbstractMutableSet<K>() {
     override fun add(element: K): Boolean {
         throw UnsupportedOperationException()
     }
@@ -63,7 +63,7 @@ internal class PersistentOrderedMapBuilderKeys<K, V>(private val builder: Persis
     }
 }
 
-internal class PersistentOrderedMapBuilderValues<K, V>(private val builder: PersistentOrderedMapBuilder<K, V>) : MutableCollection<V>, AbstractMutableCollection<V>() {
+class PersistentOrderedMapBuilderValues<K, V>(private val builder: PersistentOrderedMapBuilder<K, V>) : MutableCollection<V>, AbstractMutableCollection<V>() {
     override val size: Int
         get() = builder.size
 

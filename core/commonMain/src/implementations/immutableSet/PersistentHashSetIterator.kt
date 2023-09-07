@@ -8,7 +8,7 @@ package kotlinx.collections.immutable.implementations.immutableSet
 import kotlinx.collections.immutable.internal.assert
 import kotlin.js.JsName
 
-internal open class PersistentHashSetIterator<E>(node: TrieNode<E>) : Iterator<E> {
+open class PersistentHashSetIterator<E>(node: TrieNode<E>) : Iterator<E> {
     protected val path = mutableListOf(TrieNodeIterator<E>())
     protected var pathLastIndex = 0
     @JsName("_hasNext")
@@ -78,7 +78,7 @@ internal open class PersistentHashSetIterator<E>(node: TrieNode<E>) : Iterator<E
     }
 }
 
-internal class TrieNodeIterator<out E> {
+class TrieNodeIterator<out E> {
     private var buffer = TrieNode.EMPTY.buffer
     private var index = 0
 

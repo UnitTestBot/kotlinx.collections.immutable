@@ -70,7 +70,7 @@ private fun Array<Any?>.removeNodeAtIndex(nodeIndex: Int): Array<Any?> {
 
 
 
-internal class TrieNode<K, V>(
+class TrieNode<K, V>(
         private var dataMap: Int,
         private var nodeMap: Int,
         buffer: Array<Any?>,
@@ -78,7 +78,7 @@ internal class TrieNode<K, V>(
 ) {
     constructor(dataMap: Int, nodeMap: Int, buffer: Array<Any?>) : this(dataMap, nodeMap, buffer, null)
 
-    internal class ModificationResult<K, V>(var node: TrieNode<K, V>, val sizeDelta: Int) {
+    class ModificationResult<K, V>(var node: TrieNode<K, V>, val sizeDelta: Int) {
         inline fun replaceNode(operation: (TrieNode<K, V>) -> TrieNode<K, V>): ModificationResult<K, V> =
                 apply { node = operation(node) }
     }
@@ -90,14 +90,14 @@ internal class TrieNode<K, V>(
         private set
 
     /** Returns number of entries stored in this trie node (not counting subnodes) */
-    internal fun entryCount(): Int = dataMap.countOneBits()
+    fun entryCount(): Int = dataMap.countOneBits()
 
     // here and later:
     // positionMask — an int in form 2^n, i.e. having the single bit set, whose ordinal is a logical position in buffer
 
 
     /** Returns true if the data bit map has the bit specified by [positionMask] set, indicating there's a data entry in the buffer at that position. */
-    internal fun hasEntryAt(positionMask: Int): Boolean {
+    fun hasEntryAt(positionMask: Int): Boolean {
         return dataMap and positionMask != 0
     }
 
@@ -107,12 +107,12 @@ internal class TrieNode<K, V>(
     }
 
     /** Gets the index in buffer of the data entry key corresponding to the position specified by [positionMask]. */
-    internal fun entryKeyIndex(positionMask: Int): Int {
+    fun entryKeyIndex(positionMask: Int): Int {
         return ENTRY_SIZE * (dataMap and (positionMask - 1)).countOneBits()
     }
 
     /** Gets the index in buffer of the subtrie node entry corresponding to the position specified by [positionMask]. */
-    internal fun nodeIndex(positionMask: Int): Int {
+    fun nodeIndex(positionMask: Int): Int {
         return buffer.size - 1 - (nodeMap and (positionMask - 1)).countOneBits()
     }
 
@@ -129,7 +129,7 @@ internal class TrieNode<K, V>(
     }
 
     /** Retrieves the buffer element at the given [nodeIndex] as subtrie node. */
-    internal fun nodeAtIndex(nodeIndex: Int): TrieNode<K, V> {
+    fun nodeAtIndex(nodeIndex: Int): TrieNode<K, V> {
         @Suppress("UNCHECKED_CAST")
         return buffer[nodeIndex] as TrieNode<K, V>
     }
@@ -849,7 +849,7 @@ internal class TrieNode<K, V>(
         return this
     }
 
-    internal fun <K1, V1> equalsWith(that: TrieNode<K1, V1>, equalityComparator: (V, V1) -> Boolean): Boolean {
+    fun <K1, V1> equalsWith(that: TrieNode<K1, V1>, equalityComparator: (V, V1) -> Boolean): Boolean {
         if (this === that) return true
         if (dataMap != that.dataMap || nodeMap != that.nodeMap) return false
         if (dataMap == 0 && nodeMap == 0) { // collision node
@@ -877,7 +877,7 @@ internal class TrieNode<K, V>(
     }
 
     // For testing trie structure
-    internal fun accept(visitor: (node: TrieNode<K, V>, shift: Int, hash: Int, dataMap: Int, nodeMap: Int) -> Unit) {
+    fun accept(visitor: (node: TrieNode<K, V>, shift: Int, hash: Int, dataMap: Int, nodeMap: Int) -> Unit) {
         accept(visitor, 0, 0)
     }
 
@@ -902,7 +902,7 @@ internal class TrieNode<K, V>(
         }
     }
 
-    internal companion object {
-        internal val EMPTY = TrieNode<Nothing, Nothing>(0, 0, emptyArray())
+    companion object {
+        val EMPTY = TrieNode<Nothing, Nothing>(0, 0, emptyArray())
     }
 }

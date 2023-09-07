@@ -12,7 +12,7 @@ import kotlinx.collections.immutable.internal.DeltaCounter
 import kotlinx.collections.immutable.internal.MapImplementation
 import kotlinx.collections.immutable.internal.MutabilityOwnership
 
-internal class PersistentHashMapBuilder<K, V>(private var map: PersistentHashMap<K, V>) : PersistentMap.Builder<K, V>, AbstractMutableMap<K, V>() {
+class PersistentHashMapBuilder<K, V>(private var map: PersistentHashMap<K, V>) : PersistentMap.Builder<K, V>, AbstractMutableMap<K, V>() {
     internal var ownership = MutabilityOwnership()
         private set
     internal var node = map.node

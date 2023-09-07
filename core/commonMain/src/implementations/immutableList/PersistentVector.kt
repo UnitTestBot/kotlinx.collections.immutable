@@ -21,7 +21,7 @@ import kotlinx.collections.immutable.mutate
  * @param rootShift specifies the height of the trie structure, so that `rootShift = (height - 1) * LOG_MAX_BUFFER_SIZE`;
  *        elements in the [root] array are indexed with bits of the index starting from `rootShift` and until `rootShift + LOG_MAX_BUFFER_SIZE`.
  */
-internal class PersistentVector<E>(private val root: Array<Any?>,
+class PersistentVector<E>(private val root: Array<Any?>,
                                    private val tail: Array<Any?>,
                                    override val size: Int,
                                    private val rootShift: Int) : PersistentList<E>, AbstractPersistentList<E>() {

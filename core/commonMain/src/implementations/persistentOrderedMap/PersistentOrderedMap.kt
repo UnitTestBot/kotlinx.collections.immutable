@@ -13,7 +13,7 @@ import kotlinx.collections.immutable.implementations.immutableMap.PersistentHash
 import kotlinx.collections.immutable.internal.EndOfChain
 import kotlinx.collections.immutable.mutate
 
-internal class LinkedValue<V>(val value: V, val previous: Any?, val next: Any?) {
+class LinkedValue<V>(val value: V, val previous: Any?, val next: Any?) {
     /** Constructs LinkedValue for a new single entry */
     constructor(value: V) : this(value, EndOfChain, EndOfChain)
     /** Constructs LinkedValue for a new last entry */
@@ -27,10 +27,10 @@ internal class LinkedValue<V>(val value: V, val previous: Any?, val next: Any?) 
     val hasPrevious get() = previous !== EndOfChain
 }
 
-internal class PersistentOrderedMap<K, V>(
-        internal val firstKey: Any?,
-        internal val lastKey: Any?,
-        internal val hashMap: PersistentHashMap<K, LinkedValue<V>>
+class PersistentOrderedMap<K, V>(
+        val firstKey: Any?,
+        val lastKey: Any?,
+        val hashMap: PersistentHashMap<K, LinkedValue<V>>
 ) : AbstractMap<K, V>(), PersistentMap<K, V> {
 
     override val size: Int get() = hashMap.size
@@ -54,9 +54,7 @@ internal class PersistentOrderedMap<K, V>(
         return PersistentOrderedMapEntries(this)
     }
 
-    // TODO: compiler bug: this bridge should be generated automatically
-    @PublishedApi
-    internal fun getEntries(): Set<Map.Entry<K, V>> {
+    fun getEntries(): Set<Map.Entry<K, V>> {
         return createEntries()
     }
 
@@ -164,9 +162,9 @@ internal class PersistentOrderedMap<K, V>(
      */
     override fun hashCode(): Int = super<AbstractMap>.hashCode()
 
-    internal companion object {
+    companion object {
         private val EMPTY = PersistentOrderedMap<Nothing, Nothing>(EndOfChain, EndOfChain, PersistentHashMap.emptyOf())
         @Suppress("UNCHECKED_CAST")
-        internal fun <K, V> emptyOf(): PersistentOrderedMap<K, V> = EMPTY as PersistentOrderedMap<K, V>
+        fun <K, V> emptyOf(): PersistentOrderedMap<K, V> = EMPTY as PersistentOrderedMap<K, V>
     }
 }

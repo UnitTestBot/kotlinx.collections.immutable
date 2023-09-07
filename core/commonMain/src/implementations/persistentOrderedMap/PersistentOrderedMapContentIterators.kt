@@ -7,7 +7,7 @@ package kotlinx.collections.immutable.implementations.persistentOrderedMap
 
 import kotlinx.collections.immutable.implementations.immutableMap.MapEntry
 
-internal open class PersistentOrderedMapLinksIterator<K, V>(
+open class PersistentOrderedMapLinksIterator<K, V>(
         internal var nextKey: Any?,
         private val hashMap: Map<K, LinkedValue<V>>
 ) : Iterator<LinkedValue<V>> {
@@ -32,7 +32,7 @@ internal open class PersistentOrderedMapLinksIterator<K, V>(
 
 }
 
-internal class PersistentOrderedMapEntriesIterator<out K, out V>(map: PersistentOrderedMap<K, V>) : Iterator<Map.Entry<K, V>> {
+class PersistentOrderedMapEntriesIterator<out K, out V>(map: PersistentOrderedMap<K, V>) : Iterator<Map.Entry<K, V>> {
     private val internal = PersistentOrderedMapLinksIterator(map.firstKey, map.hashMap)
 
     override fun hasNext(): Boolean {
@@ -47,7 +47,7 @@ internal class PersistentOrderedMapEntriesIterator<out K, out V>(map: Persistent
     }
 }
 
-internal class PersistentOrderedMapKeysIterator<out K, out V>(map: PersistentOrderedMap<K, V>) : Iterator<K> {
+class PersistentOrderedMapKeysIterator<out K, out V>(map: PersistentOrderedMap<K, V>) : Iterator<K> {
     private val internal = PersistentOrderedMapLinksIterator(map.firstKey, map.hashMap)
 
     override fun hasNext(): Boolean {
@@ -62,7 +62,7 @@ internal class PersistentOrderedMapKeysIterator<out K, out V>(map: PersistentOrd
     }
 }
 
-internal class PersistentOrderedMapValuesIterator<out K, out V>(map: PersistentOrderedMap<K, V>) : Iterator<V> {
+class PersistentOrderedMapValuesIterator<out K, out V>(map: PersistentOrderedMap<K, V>) : Iterator<V> {
     private val internal = PersistentOrderedMapLinksIterator(map.firstKey, map.hashMap)
 
     override fun hasNext(): Boolean {

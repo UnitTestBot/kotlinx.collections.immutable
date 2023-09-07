@@ -12,7 +12,7 @@ package kotlinx.collections.immutable.implementations.immutableList
  * [TrieIterator] is responsible for iterating over elements located at root,
  * whereas tail elements are iterated directly from this class.
  */
-internal class PersistentVectorMutableIterator<T>(
+class PersistentVectorMutableIterator<T>(
         private val builder: PersistentVectorBuilder<T>,
         index: Int
 ) : MutableListIterator<T>, AbstractListIterator<T>(index, builder.size) {

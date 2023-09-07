@@ -5,7 +5,7 @@
 
 package kotlinx.collections.immutable.implementations.immutableList
 
-internal class TrieIterator<out E>(root: Array<Any?>,
+class TrieIterator<out E>(root: Array<Any?>,
                                    index: Int,
                                    size: Int,
                                    private var height: Int) : AbstractListIterator<E>(index, size) {
@@ -17,7 +17,7 @@ internal class TrieIterator<out E>(root: Array<Any?>,
         fillPath(index - if (isInRightEdge) 1 else 0, 1)
     }
 
-    internal fun reset(root: Array<Any?>, index: Int, size: Int, height: Int) {
+    fun reset(root: Array<Any?>, index: Int, size: Int, height: Int) {
         this.index = index
         this.size = size
         this.height = height

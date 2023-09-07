@@ -5,4 +5,4 @@
 
 package kotlinx.collections.immutable.internal
 
-internal object EndOfChain
+object EndOfChain

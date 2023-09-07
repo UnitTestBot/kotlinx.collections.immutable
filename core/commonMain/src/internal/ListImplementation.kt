@@ -7,24 +7,24 @@ package kotlinx.collections.immutable.internal
 
 import kotlin.jvm.JvmStatic
 
-internal object ListImplementation {
+object ListImplementation {
 
     @JvmStatic
-    internal fun checkElementIndex(index: Int, size: Int) {
+    fun checkElementIndex(index: Int, size: Int) {
         if (index < 0 || index >= size) {
             throw IndexOutOfBoundsException("index: $index, size: $size")
         }
     }
 
     @JvmStatic
-    internal fun checkPositionIndex(index: Int, size: Int) {
+    fun checkPositionIndex(index: Int, size: Int) {
         if (index < 0 || index > size) {
             throw IndexOutOfBoundsException("index: $index, size: $size")
         }
     }
 
     @JvmStatic
-    internal fun checkRangeIndexes(fromIndex: Int, toIndex: Int, size: Int) {
+    fun checkRangeIndexes(fromIndex: Int, toIndex: Int, size: Int) {
         if (fromIndex < 0 || toIndex > size) {
             throw IndexOutOfBoundsException("fromIndex: $fromIndex, toIndex: $toIndex, size: $size")
         }
@@ -34,7 +34,7 @@ internal object ListImplementation {
     }
 
     @JvmStatic
-    internal fun orderedHashCode(c: Collection<*>): Int {
+    fun orderedHashCode(c: Collection<*>): Int {
         var hashCode = 1
         for (e in c) {
             hashCode = 31 * hashCode + (e?.hashCode() ?: 0)
@@ -43,7 +43,7 @@ internal object ListImplementation {
     }
 
     @JvmStatic
-    internal fun orderedEquals(c: Collection<*>, other: Collection<*>): Boolean {
+    fun orderedEquals(c: Collection<*>, other: Collection<*>): Boolean {
         if (c.size != other.size) return false
 
         val otherIterator = other.iterator()
